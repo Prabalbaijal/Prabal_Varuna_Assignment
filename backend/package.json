@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "type": "module",
-  "prisma":{
-      "seed": "node --loader ts-node/esm prisma/seed.ts"
+  "prisma": {
+    "seed": "node --loader ts-node/esm prisma/seed.ts"
   },
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/adapters/inbound/http/server.ts",
-    "build": "tsc -p .",
+    "dev": "tsx watch src/adapters/inbound/http/server.ts",
+    "build": "tsc",
     "start": "node dist/adapters/inbound/http/server.js",
     "prisma:migrate": "prisma migrate dev --name init",
     "test": "jest --runInBand",
@@ -20,6 +20,7 @@
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^6.19.0",
+    "cors": "^2.8.5",
     "express": "^5.1.0",
     "zod": "^4.1.12"
   },
@@ -34,6 +35,7 @@
     "ts-jest": "^29.4.5",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
+    "tsx": "^4.20.6",
     "typescript": "^5.9.3"
   }
 }
