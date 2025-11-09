@@ -3,14 +3,17 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type":"module",
+  "type": "module",
+  "prisma":{
+      "seed": "node --loader ts-node/esm prisma/seed.ts"
+  },
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/adapters/inbound/http/server.ts",
     "build": "tsc -p .",
     "start": "node dist/adapters/inbound/http/server.js",
     "prisma:migrate": "prisma migrate dev --name init",
-    "prisma:seed": "ts-node prisma/seed.ts",
-    "test": "jest --runInBand"
+    "test": "jest --runInBand",
+    "prisma:seed": "npx prisma db seed"
   },
   "keywords": [],
   "author": "",
@@ -29,6 +32,7 @@
     "prisma": "^6.19.0",
     "supertest": "^7.1.4",
     "ts-jest": "^29.4.5",
+    "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.9.3"
   }
