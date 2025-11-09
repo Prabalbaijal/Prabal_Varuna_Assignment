@@ -79,7 +79,7 @@ export default function RoutesPage() {
         <button
           onClick={handleFilterApply}
           disabled={loading}
-          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition disabled:opacity-50"
+          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition disabled:opacity-50 cursor-pointer"
         >
           {loading ? "Loading..." : "Apply Filters"}
         </button>
@@ -126,7 +126,7 @@ export default function RoutesPage() {
                   <td className="p-3 text-center">
                     <button
                       onClick={() => setBaseline(r.routeId)}
-                      className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-lg transition"
+                      className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-lg transition cursor-pointer"
                     >
                       Set Baseline
                     </button>
@@ -144,7 +144,7 @@ export default function RoutesPage() {
           <button
             onClick={() => setPage(p => Math.max(p - 1, 1))}
             disabled={page === 1}
-            className="px-3 py-1 rounded-lg bg-gray-700 hover:bg-gray-600 disabled:opacity-50"
+            className="px-3 py-1 rounded-lg bg-gray-700 hover:bg-gray-600 disabled:opacity-50 cursor-pointer"
           >
             Prev
           </button>
@@ -153,7 +153,7 @@ export default function RoutesPage() {
               key={pNum}
               onClick={() => setPage(pNum)}
               className={`px-3 py-1 rounded-lg ${
-                pNum === page ? "bg-blue-500 text-white" : "bg-gray-700 hover:bg-gray-600"
+                pNum === page ? "bg-blue-500 text-white" : "bg-gray-700 hover:bg-gray-600 cursor-pointer"
               }`}
             >
               {pNum}
@@ -162,7 +162,7 @@ export default function RoutesPage() {
           <button
             onClick={() => setPage(p => Math.min(p + 1, totalPages))}
             disabled={page === totalPages}
-            className="px-3 py-1 rounded-lg bg-gray-700 hover:bg-gray-600 disabled:opacity-50"
+            className="px-3 py-1 rounded-lg bg-gray-700 hover:bg-gray-600 disabled:opacity-50 cursor-pointer"
           >
             Next
           </button>

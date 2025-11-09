@@ -6,5 +6,5 @@ export async function computeCBForShip(routeId: string, year: number) {
   if (!route) throw new Error("Route not found");
   const cb = computeCB(TARGET_INTENSITY, route.ghgIntensity, route.fuelConsumption);
   await prisma.shipCompliance.create({ data: { shipId: routeId, year, cbGco2eq: cb }});
-  return cb;
+  return {cb_before: cb};
 }

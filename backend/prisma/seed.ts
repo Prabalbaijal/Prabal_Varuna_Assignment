@@ -1,28 +1,72 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
+// ⚙️ Formula reminder (from your compliance.js):
+// CB = (TARGET_INTENSITY - actualIntensity) * energyInScopeMJ(fuelConsumptionT)
+// TargetIntensity = 89.3368
+
 async function main() {
   const routes = [
-    { routeId: "R001", vesselType: "Container", fuelType: "HFO", year: 2024, ghgIntensity: 91.0, fuelConsumption: 5000, distance: 12000, totalEmissions: 4500, isBaseline: true },
-    { routeId: "R002", vesselType: "BulkCarrier", fuelType: "LNG", year: 2024, ghgIntensity: 88.0, fuelConsumption: 4800, distance: 11500, totalEmissions: 4200 },
-    { routeId: "R003", vesselType: "Tanker", fuelType: "MGO", year: 2024, ghgIntensity: 93.5, fuelConsumption: 5100, distance: 12500, totalEmissions: 4700 },
-    { routeId: "R004", vesselType: "RoRo", fuelType: "HFO", year: 2025, ghgIntensity: 89.2, fuelConsumption: 4900, distance: 11800, totalEmissions: 4300 },
-    { routeId: "R005", vesselType: "Container", fuelType: "LNG", year: 2025, ghgIntensity: 90.5, fuelConsumption: 4950, distance: 11900, totalEmissions: 4400 }
+    // Surplus ship (lower GHG intensity)
+    {
+      routeId: "R001",
+      vesselType: "Container",
+      fuelType: "LNG",
+      year: 2024,
+      ghgIntensity: 85.0, // < target
+      fuelConsumption: 5000,
+      distance: 12000,
+      totalEmissions: 4500,
+      isBaseline: true,
+    },
+    // Another surplus ship (low GHG)
+    {
+      routeId: "R002",
+      vesselType: "BulkCarrier",
+      fuelType: "LNG",
+      year: 2024,
+      ghgIntensity: 87.0, // < target
+      fuelConsumption: 4800,
+      distance: 11500,
+      totalEmissions: 4200,
+    },
+    // Deficit ship (high GHG)
+    {
+      routeId: "R003",
+      vesselType: "Tanker",
+      fuelType: "HFO",
+      year: 2024,
+      ghgIntensity: 93.0, // > target
+      fuelConsumption: 5100,
+      distance: 12500,
+      totalEmissions: 4700,
+    },
+    // Slightly deficit ship
+    {
+      routeId: "R004",
+      vesselType: "RoRo",
+      fuelType: "HFO",
+      year: 2024,
+      ghgIntensity: 91.5, // > target
+      fuelConsumption: 4900,
+      distance: 11800,
+      totalEmissions: 4300,
+    },
   ];
 
   for (const r of routes) {
     await prisma.route.upsert({
       where: { routeId: r.routeId },
       update: r,
-      create: r
+      create: r,
     });
   }
 
-  console.log("Seed completed");
+  console.log("New balanced routes seeded successfully!");
 }
 
-main().catch(e => {
-  console.error(e);
-}).finally(async () => {
-  await prisma.$disconnect();
-});
+main()
+  .catch((e) => console.error(e))
+  .finally(async () => {
+    await prisma.$disconnect();
+  });

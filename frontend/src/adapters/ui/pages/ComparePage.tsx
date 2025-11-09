@@ -37,36 +37,39 @@ export default function ComparePage() {
   }
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
+    <div className="p-6 min-h-screen bg-gray-900 text-gray-100">
       <Toaster position="top-right" reverseOrder={false} />
-      <h2 className="text-2xl font-bold mb-6 text-gray-800">📊 Routes Comparison (Target {TARGET})</h2>
+      <h2 className="text-2xl font-bold mb-6 text-white">📊 Routes Comparison (Target {TARGET})</h2>
 
       {/* Table Card */}
-      <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-6">
+      <div className="bg-gray-800 rounded-xl shadow-lg overflow-hidden mb-6 border border-gray-700">
         <table className="w-full table-auto border-collapse">
-          <thead className="bg-blue-600 text-white">
+          <thead className="bg-gray-700 text-gray-200">
             <tr>
               <th className="p-3 text-left">Route</th>
-              <th>Baseline</th>
-              <th>Comparison</th>
-              <th>% Diff</th>
-              <th>Compliant</th>
+              <th className="p-3 text-center">Baseline</th>
+              <th className="p-3 text-center">Comparison</th>
+              <th className="p-3 text-center">% Diff</th>
+              <th className="p-3 text-center">Compliant</th>
             </tr>
           </thead>
           <tbody>
             {rows.length === 0 ? (
               <tr>
-                <td colSpan={5} className="p-4 text-center text-gray-500">
+                <td colSpan={5} className="p-4 text-center text-gray-400">
                   {loading ? "Loading..." : "No data found"}
                 </td>
               </tr>
             ) : (
               rows.map((r, i) => (
-                <tr key={i} className={`border-t hover:bg-blue-50 transition ${r.compliant ? "" : "bg-red-50"}`}>
-                  <td className="p-3 font-medium text-gray-700">{r.name}</td>
+                <tr
+                  key={i}
+                  className={`border-t border-gray-700 hover:bg-gray-700 transition ${r.compliant ? "" : "bg-red-900/30"}`}
+                >
+                  <td className="p-3 font-medium">{r.name}</td>
                   <td className="text-center">{r.baseline.toFixed(2)}</td>
                   <td className="text-center">{r.comparison.toFixed(2)}</td>
-                  <td className={`text-center ${r.percentDiff > 0 ? "text-red-600" : "text-green-600"}`}>
+                  <td className={`text-center font-semibold ${r.percentDiff > 0 ? "text-red-400" : "text-green-400"}`}>
                     {r.percentDiff.toFixed(2)}%
                   </td>
                   <td className="text-center">{r.compliant ? "✅" : "❌"}</td>
@@ -78,20 +81,23 @@ export default function ComparePage() {
       </div>
 
       {/* Chart Card */}
-      <div className="bg-white rounded-xl shadow-lg p-4">
-        <h3 className="text-lg font-semibold mb-4">GHG Intensity Comparison</h3>
+      <div className="bg-gray-800 rounded-xl shadow-lg p-4 border border-gray-700">
+        <h3 className="text-lg font-semibold mb-4 text-white">GHG Intensity Comparison</h3>
         <div style={{ width: "100%", height: 350 }}>
           <ResponsiveContainer>
             <BarChart data={rows} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip formatter={(value:number) => value.toFixed(2)} />
-              <Legend />
-              <Bar dataKey="baseline" name="Baseline" fill="#4299e1" radius={[4,4,0,0]}>
-                <LabelList dataKey="baseline" position="top" formatter={(val:number)=>val.toFixed(1)} />
+              <XAxis dataKey="name" stroke="#e5e7eb" />
+              <YAxis stroke="#e5e7eb" />
+              <Tooltip
+                contentStyle={{ backgroundColor: "#1f2937", border: "none", color: "#f9fafb" }}
+                formatter={(value:number) => value.toFixed(2)}
+              />
+              <Legend wrapperStyle={{ color: "#f9fafb" }} />
+              <Bar dataKey="baseline" name="Baseline" fill="#3b82f6" radius={[4,4,0,0]}>
+                <LabelList dataKey="baseline" position="top" formatter={(val:number)=>val.toFixed(1)} fill="#f9fafb"/>
               </Bar>
-              <Bar dataKey="comparison" name="Comparison" fill="#48bb78" radius={[4,4,0,0]}>
-                <LabelList dataKey="comparison" position="top" formatter={(val:number)=>val.toFixed(1)} />
+              <Bar dataKey="comparison" name="Comparison" fill="#10b981" radius={[4,4,0,0]}>
+                <LabelList dataKey="comparison" position="top" formatter={(val:number)=>val.toFixed(1)} fill="#f9fafb"/>
               </Bar>
             </BarChart>
           </ResponsiveContainer>

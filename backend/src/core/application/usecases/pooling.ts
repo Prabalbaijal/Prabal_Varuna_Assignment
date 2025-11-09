@@ -2,7 +2,8 @@ import prisma from "../../../../infrastructure/prismaClient.js";
 
 export async function createPool(year: number, members: { shipId: string, cbBefore: number }[]) {
   const sum = members.reduce((s,m) => s + m.cbBefore, 0);
-  if (sum < 0) throw new Error("Total pool CB must be >= 0");
+  if (sum < -1e-6) throw new Error(`Total pool CB must be >= 0, got ${sum}`);
+
 
   const items = members.map(m => ({ ...m, cbAfter: m.cbBefore }));
   items.sort((a,b) => b.cbAfter - a.cbAfter);

@@ -7,7 +7,7 @@ router.get("/cb", async (req,res) => {
   if (!shipId || !year) return res.status(400).json({ error: "shipId & year required" });
   try {
     const cb = await computeCBForShip(String(shipId), Number(year));
-    res.json({ cb_before: cb });
+    res.json(cb);
   } catch (err:any) {
     res.status(500).json({ error: err.message });
   }
