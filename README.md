@@ -77,7 +77,8 @@ npm run dev
 
 # Frontend
 cd ../frontend
-npm run dev```
+npm run dev
+```
 
 # Sample Rwquests/Responses
 ##Routes
