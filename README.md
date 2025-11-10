@@ -51,10 +51,13 @@ cd backend```
  
 ### 2.Environment Variables
 
-Create a .env file in the backend root:
+Create a .env file in the backend root with following content:
 
 DATABASE_URL="postgresql://neondb_owner:npg_XcD9Yp6xMbHn@ep-lively-hill-ahy2sn75-pooler.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
 PORT=9000
+Create a .env file in the frontend root with following content:
+VITE_API_URL=http://localhost:9000
+
 
 ###3.Install Dependencies 
 
