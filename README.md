@@ -80,37 +80,52 @@ cd ../frontend
 npm run dev
 ```
 
-# Sample Rwquests/Responses
-##Routes
-##Request
- GET /routes?year=2024
-##Response
- {
+# Sample Requests / Responses
+
+## Routes
+
+**Request**  
+
+```http
+GET /routes?year=2024
+**Response**
+
+{
   "data": [
     { "routeId": "R001", "vesselType": "Container", "fuelType": "HFO", "year": 2024, "ghgIntensity": 91.0, "isBaseline": true },
     { "routeId": "R002", "vesselType": "BulkCarrier", "fuelType": "LNG", "year": 2024, "ghgIntensity": 88.0, "isBaseline": false }
   ]
 }
 
+```
 ## Banking
-#request
-POST /banking/bank
+
+**Request**
+
+```POST /banking/bank
+Content-Type: application/json
+
 {
   "shipId": "R002",
   "year": 2024,
   "amount": 50
 }
-#Response
+
+**Response**
+
 {
   "shipId": "R002",
   "year": 2024,
   "banked": 50
 }
+```
+## Pooling
 
- 
-##Pooling
-#request
-POST /pools
+**Request**
+
+```POST /pools
+Content-Type: application/json
+
 {
   "year": 2024,
   "members": [
@@ -118,14 +133,9 @@ POST /pools
     { "shipId": "R002", "cbBefore": -50 }
   ]
 }
-{
-  "poolId": 1,
-  "members": [
-    { "shipId": "R001", "cbBefore": 100, "cbAfter": 50 },
-    { "shipId": "R002", "cbBefore": -50, "cbAfter": 0 }
-  ]
-}
-#Response
+
+**Response**
+
 {
   "poolId": 1,
   "members": [
@@ -134,4 +144,5 @@ POST /pools
   ]
 }
 
+```
  
