@@ -100,7 +100,7 @@ GET /routes?year=2024
 ```
 **Screenshot**  
 
-![Routes Tab Screenshot](../frontend/public/screenshots/routes.png)
+![Routes Tab Screenshot](./frontend/public/screenshots/routes.png)
 
 ## Banking
 
@@ -126,7 +126,7 @@ Content-Type: application/json
 
 **Screenshot**  
 
-![Banking Tab Screenshot](../frontend/public/screenshots/banking.png)
+![Banking Tab Screenshot](./frontend/public/screenshots/banking.png)
 
 ## Pooling
 
@@ -158,9 +158,9 @@ Content-Type: application/json
 
 **Screenshot**  
 
-![Pooling Tab Screenshot](../frontend/public/screenshots/pooling.png)
+![Pooling Tab Screenshot](./frontend/public/screenshots/pooling.png)
 
 
 **Screenshot**  
 
-![Comparison Tab Screenshot](../frontend/public/screenshots/comparison.png)
+![Comparison Tab Screenshot](./frontend/public/screenshots/comparison.png)
